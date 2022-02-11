@@ -1,0 +1,57 @@
+body{
+    background-image: url("space.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+.All_Groups{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45%;
+    border: 1px solid  rgb(241, 112, 253);
+    border-radius: 20px;
+    box-shadow: 10px 10px  10px rgb(248, 176, 255);
+    padding: 1%;
+}
+.Group{
+    text-align: center;
+    width: 45%;
+    border: 1px solid  rgb(241, 112, 253);
+    border-radius: 20px;
+    box-shadow: 10px 10px  10px rgb(248, 176, 255);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: inline-block;
+    
+}
+.Group_image{
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    border: rgb(248, 176, 255) 1px solid;
+    border-radius: 10px;
+    margin: 10px;
+}
+.Group_button{
+    margin: 10px auto;
+    text-align: center;
+    width: 150px;
+    height: 40px;
+    display: block;
+    background-color: rgb(241, 112, 253);
+    font-size: 20px;
+    width: 50%;
+    height: 7%;
+    color: black;
+    border-radius: 20px;
+}
+button:hover{
+    cursor: pointer;
+    background-color: blueviolet;
+}

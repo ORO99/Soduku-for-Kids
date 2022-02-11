@@ -1,0 +1,68 @@
+body{
+    text-align: center;
+    background-image: url("space.jpg");
+
+}
+#container{
+    width:fit-content;
+    height: 540px;
+    border: 1px solid  rgb(241, 112, 253);
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 50px;
+    border-radius: 20px;
+    box-shadow: 10px 10px  10px rgb(248, 176, 255);
+
+
+}
+button{
+    background-color: rgb(241, 112, 253);
+    font-size: 20px;
+    width: 50%;
+    height: 7%;
+    color: black;
+    border-radius: 20px;
+    
+}
+button:hover{
+    cursor: pointer;
+    background-color: blueviolet;
+}
+#g1, #g2{
+    float: left;
+    padding: 10px;
+    border: hotpink 1px solid;
+    border-radius: 20px;
+    box-shadow: 10px 10px  10px rgb(243, 146, 252);
+    
+
+}
+#g3, #g4{
+    float: right;
+    padding: 10px;
+    border: hotpink 1px solid;
+    border-radius: 20px;
+    box-shadow: 10px 10px  10px rgb(243, 146, 252);
+    
+}
+img{
+    width: 80px;
+    height: 80px;
+    border: rgb(248, 176, 255) 1px solid;
+    border-radius: 10px;
+    margin: 10px;
+
+}
+topContainer{   
+    width: fit-content;
+    height: fit-content;
+    background-color: aqua;
+}
+bottomcontainer{
+    width: fit-content;
+    height: fit-content;
+    background-color: aqua;
+}
