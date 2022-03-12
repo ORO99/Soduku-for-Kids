@@ -1,14 +1,48 @@
 let userName = localStorage.getItem("userName");
-let userDate = localStorage.getItem(userName);
+let userDate = localStorage.getItem("lastVisit");
 var level = localStorage.getItem("level");
+var difficulty = localStorage.getItem("difficulty");
 let group = localStorage.getItem("group");
 let gridSize = Math.pow((+level + 1), 2);
+let tilesLeft = gridSize * gridSize;
 let started = false;
 let gameWon = false;
-let randomCount = level == "1" ? 4 : 30;
+//let randomCount = level == "1" ? 4 : 30;
+let randomCount;
+if(level == "1")
+{
+    switch(difficulty)
+    {
+        case "1":
+            randomCount = 15;
+            break;
+        case "2":
+            randomCount = 4;
+            break;
+        case "3":
+            randomCount = 2;
+            break;
+    }
+}   
+else
+{
+    switch(difficulty)
+    {
+        case "1":
+            randomCount = 75;
+            break;
+        case "2":
+            randomCount = 30;
+            break;
+        case "3":
+            randomCount = 15;
+            break;
+    }
+}
 let path = `Images/Level${level}/Group${group}/`;
 var timesArray1 = [];
 var timesArray2 = [];
+let randArray = [];
 
 
 function level1Reset()
@@ -47,6 +81,7 @@ function checkAnswers() {
     // rows
     for (let i = 0; i < gridSize; i++) {
         if (checkDuplicate(userAnswers[i])) {
+            console.log("false");
             return false;
         }
     }
@@ -59,6 +94,7 @@ function checkAnswers() {
             tmp.push(current);
         }
         if (checkDuplicate(tmp)) {
+            console.log("false");
             return false;
         }
     }
@@ -75,12 +111,14 @@ function checkAnswers() {
             }
             console.log(tmp);
             if (checkDuplicate(tmp)) {
+                console.log("false");
                 return false;
             }
         }
     }
-
+    console.log("true");
     return true;
+    
 }
 //for random pictures 
 //for random pictures
@@ -99,23 +137,38 @@ function qs(q) {
 
 //function place random tiles 
 function placeRandomTiles() {
+    sodokoSolver(userAnswers);
     let pic, pos;
-    for (let i = 1; i <= randomCount; i++) {
-    
-        if(gridSize == 4)
+    let k = 1;
+    for(let i=0; i<Math.pow(gridSize,2)-randomCount; i++)
+    {
+        do
         {
-            pos = Math.floor(Math.random() * 16) + 1;
-            pic = Math.floor(Math.random() * 4) + 1;
-        }
-        if(gridSize == 9)
-        {
-            pos = Math.floor(Math.random() * 81) + 1;
-            pic = Math.floor(Math.random() * 9) + 1;
-        }
-        qs(`#tile${pos}`).src = `${path}${pic}.png`;
-        populateUserAnswersArray(pos, pic);
+            pos = Math.floor(Math.random() * Math.pow(gridSize,2)) + 1;
+            randArray[i] = pos
+        }while(new Set(randArray).size !== randArray.length);
+        populateUserAnswersArray(pos, undefined);
     }
+    console.log(userAnswers);
+    for(let i=0; i<gridSize; i++)
+    {
+        for(let j=0; j<gridSize; j++)
+        {
+            pic = userAnswers[i][j];
+            if(pic !== undefined)
+            {
+                qs(`#tile${k}`).src = `${path}${pic}.png`;
+                qs(`#tile${k}`).style.backgroundColor = "rgba(0, 195, 255, 0.658)";
+            }
+                
+
+            k++;
+        }
+    }
+    //tilesLeft = gridSize == 4? tilesLeft-=4 : tilesLeft -= 30;
+    tilesLeft -= randomCount;
 }
+
 
 
 function drawGrid() {
@@ -156,6 +209,7 @@ function drawGrid() {
             tile.style.width = tileDimensions;
             tile.style.height = tileDimensions;
             tile.id = `tile${counter++}`;
+            tile.className = "gridTiles";
             row.appendChild(tile);
         }
     }
@@ -165,23 +219,88 @@ let userAnswers = [];
 for (let i = 0; i < gridSize; i++) {
     userAnswers.push([]);
 }
+function isValid(userAnswers, row, col, k) {
+    for (let i = 0; i < gridSize; i++) {
+        const m = Math.sqrt(gridSize) * Math.floor(row / Math.sqrt(gridSize)) + Math.floor(i / Math.sqrt(gridSize));
+        const n = Math.sqrt(gridSize) * Math.floor(col / Math.sqrt(gridSize)) + i % Math.sqrt(gridSize);
+        if (userAnswers[row][i] == k || userAnswers[i][col] == k || userAnswers[m][n] == k) {
+          return false;
+        }
+    }
+    return true;
+}
 
-let tilesLeft = gridSize * gridSize;
+
+function sodokoSolver(data) {
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      if (data[i][j] == undefined) {
+        for (let k = 1; k <= gridSize; k++) {
+          if (isValid(data, i, j, k)) {
+            data[i][j] = k;
+          if (sodokoSolver(data)) {
+           return true;
+          } else {
+           data[i][j] = undefined;
+          }
+         }
+       }
+       return false;
+     }
+   }
+ }
+ return true;
+}
+
 let currentTile = 1;
 window.addEventListener('load', () => {
     drawGrid();
-    placeRandomTiles();
     getScores();
     let currentTile = 1;
     let selected = qs(`#tile${currentTile}`);
-    //selected.style.borderColor = "yellow"
-    document.addEventListener('keydown', (e) => {
-        for (let i = 0; i <= gridSize; i++) {
-            if (e.key == i && started == true) {
-                selected.src = `${path}${i}.png`;
-                populateUserAnswersArray(currentTile, i);
-            }
+    // let gridtiles = document.querySelectorAll(".gridTiles");
+    // gridtiles.forEach(element => {      //mouse event handlers
+    //     element.addEventListener('click',function(){
+    //         selected.style.border = "3px solid rgb(54, 8, 58, 0.89)"
+    //         currentTile = element.id.split('e')[1];
+    //         console.log(selected);
+    //         selected = qs(`#tile${currentTile}`);
+    //         selected.style.border = "3px solid rgb(241, 112, 253)";
+    //     });
+    // });
+    document.addEventListener('click',function(e){
+        //console.log(e.target)
+        if(e.target.className == "gridTiles")
+        {
+            selected.style.border = "3px solid rgb(54, 8, 58, 0.89)"
+            currentTile = +e.target.id.split('e')[1];
+            //currentTile = parseInt(currentTile,10);
+            console.log("current tile from mouse");
+            console.log(currentTile);
+            selected = qs(`#tile${currentTile}`);
+            selected.style.border = "3px solid rgb(241, 112, 253)";
+            console.log("rand array from mouse: ");
+            console.log(randArray);
+            console.log(randArray.indexOf(currentTile));
         }
+    });
+    document.addEventListener('keydown', (e) => {    //keyboard event handlers
+        //for (let i = 0; i <= gridSize; i++) {
+            // console.log(e.key >= 1);
+            // console.log(e.key <= gridSize);
+            // console.log(randArray.indexOf(currentTile) !== -1);
+            // console.log(currentTile);
+        if (e.key >= 1 && e.key <= gridSize && started == true && randArray.indexOf(currentTile) !==  -1)
+        {
+            //console.log(selected);
+            console.log("rand array from keyboard: ");
+            console.log(randArray.indexOf(currentTile));
+            selected.src = `${path}${e.key}.png`;
+            populateUserAnswersArray(currentTile, +e.key);
+            //console.log(userAnswers);
+            //console.log(tilesLeft);
+        }
+       // }
         switch (e.code) {
             case "ArrowUp":
                 console.log("up")
@@ -216,9 +335,12 @@ window.addEventListener('load', () => {
                 }
                 break;
         }
+        console.log("rand array from below keyboard: ");
+            console.log(randArray.indexOf(currentTile));
+        console.log(currentTile);
         selected = qs(`#tile${currentTile}`);
-        selected.style.border = "3px solid rgb(241, 112, 253)"
-        if (tilesLeft == 0) {
+        selected.style.border = "3px solid rgb(241, 112, 253)";
+        if (tilesLeft <= 0) {
             if (checkAnswers()) {
                 var finishingTime = timer.innerHTML;
                 var mins = parseInt(finishingTime.split(":")[0]) * 60;
@@ -256,11 +378,12 @@ var body = document.getElementsByTagName("body")[0];
 body.appendChild(button);
 button.addEventListener("click", function () {
     this.disabled = true;
+    placeRandomTiles();
     started = true;
     s1.play();
     if (level == "1") {
         document.getElementById('timer').innerHTML =
-            01+ ":" + 20;
+            01+ ":" + 01;
         startTimer();
     }
     else {
@@ -284,7 +407,7 @@ button.addEventListener("click", function () {
 
         document.getElementById('timer').innerHTML =
             m + ":" + s;
-        console.log(m)
+        //console.log(m)
         let timer = setTimeout(startTimer, 1000);
         if(gameWon == true)
             clearTimeout(timer);
@@ -318,18 +441,21 @@ document.body.appendChild(visit);
 let first = document.createElement("first");
 first.id = "first";
 first.innerHTML = ("Play for a place on the Podium");
+first.style.boxShadow = "5px 5px  5px rgb(239, 141, 248, 0.89)";
 document.body.appendChild(first);
 
 
 let second = document.createElement("second");
 second.id = "second";
 second.innerHTML = ("Play for a place on the Podium");
+second.style.boxShadow = "5px 5px  5px rgb(239, 141, 248, 0.89)";
 document.body.appendChild(second);
 
 
 let third = document.createElement("third");
 third.id = "third";
 third.innerHTML = ("Play for a place on the Podium");
+third.style.boxShadow = "5px 5px  5px rgb(239, 141, 248, 0.89)";
 document.body.appendChild(third);
 
 function getScores(){

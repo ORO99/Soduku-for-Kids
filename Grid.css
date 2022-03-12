@@ -10,25 +10,28 @@ body {
   font-weight: bold;
   text-align: center;
   caret-color: transparent;
+  overflow: hidden;
 }
 
 #bar{
+  position: absolute;
   height: fit-content;
   width: fit-content;
-  margin-bottom: 1%;  
-  margin-top: 0.5%;
-  margin-left: auto;
-  margin-right: auto;
+  top: 3%;
+  right: 30%;
+  left: 37%;
   border: 3px solid rgb(154, 252, 255);
   
 
 }
 
 #grid{
+  position: absolute;
   height: fit-content;
   width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  left: 37%;
+  right: 30%;
+  top: 21%;
   border: 3px solid rgb(54, 8, 58, 0.89); 
 }
 
@@ -156,6 +159,7 @@ button{
 }
 /* Game timer*/
 #timer{
+  position: absolute;
   border-radius: 15px;
   border: 3px solid rgb(0, 195, 255);
   background-color:rgb(0, 195, 255) ;
@@ -231,6 +235,7 @@ li{
   cursor:pointer;
   font-size:20px;
   font-family:"Comic Sans MS" ;
+  padding-top: 10px;
   font-weight: bolder;
   border:none;
   box-shadow: 5px 5px 5px rgb(0, 195, 255);

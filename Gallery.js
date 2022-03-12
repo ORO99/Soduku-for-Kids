@@ -144,6 +144,9 @@ function DrawGallery4x4()
     bottomContainer.appendChild(group4);
     container.appendChild(topContainer);
     container.appendChild(bottomContainer);
-    document.body.appendChild(container);
+    var primediv = document.createElement("div");
+    primediv.id = "particles-js";
+    primediv.appendChild(container);
+    document.body.appendChild(primediv);
     
 }
