@@ -35,7 +35,7 @@ JAVASCRIPT
     <img src="Images/Readme/lose.jpg"  style="width: 30%;margin-left:2%;" alt="connection" title="connection">
 </div>
 <br>
-## Credits:
+## Credits
 1. Alaa Gamal
 2. Omar Hussien
 3. Yassmin Hamdy
