@@ -14,8 +14,8 @@ tracks score for the top 3 players in each level
 4. Run Register.html in your favourite browser from vs code live server and follow on screen instructions
   
 ## How to play:
-1.Use arrows to navigate through the grid and use numbers 1 through 4 to insert an image into that tile (4x4) & 1 through 9 in (9x9)
-2.Use the mouse to navigate to a certain tile for a better user experience. Make sure to win before time runs out and compete for a place on the podium!
+1. Use arrows to navigate through the grid and use numbers 1 through 4 to insert an image into that tile (4x4) & 1 through 9 in (9x9)
+2. Use the mouse to navigate to a certain tile for a better user experience. Make sure to win before time runs out and compete for a place on the podium!
   
 ## Technologies used:
 HTML 
@@ -38,7 +38,7 @@ JAVASCRIPT
 ## Credits:
 - Alaa Gamal
 - Omar Hussien
-- Yassmin Hamdy : @https://github.com/yassmin95
+- Yassmin Hamdy
 - Youssef Abdelnasser
 
 ## License
