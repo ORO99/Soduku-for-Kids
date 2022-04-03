@@ -41,7 +41,7 @@ JAVASCRIPT
 - Omar Hussien
 - Yassmin Hamdy
 - Youssef Abdelnasser
-- @github/yassmin95
+@github/yassmin95
 
 ## License
 - feel free to check out our project, use it ...contribute .... have fun! :)
