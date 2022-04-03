@@ -36,10 +36,10 @@ JAVASCRIPT
 </div>
 <br>
 ## Credits
-1. Alaa Gamal
-2. Omar Hussien
-3. Yassmin Hamdy
-4. Youssef Abdelnasser
+- Alaa Gamal
+- Omar Hussien
+- Yassmin Hamdy
+- Youssef Abdelnasser
 
 ## License
 - feel free to check out our project, use it ...contribute .... have fun! :)
