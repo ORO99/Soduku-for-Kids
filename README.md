@@ -1,7 +1,7 @@
 # Soduku for Kids
 ![Image](Images/Readme/banner.jpg)
 
-#Soduku for Kids (Browser Game)
+#### Soduku for Kids (Browser Game)
                                                 
 Soduku game for kids: includes 2 levels (4x4) & (9x9) timer runs out at 1 minute for (4x4) & 2 minutes for(9x9) 
 Game also includes 4 different groups of images to use instead of numbers in the gallery section. game keeps track of user's last login and
