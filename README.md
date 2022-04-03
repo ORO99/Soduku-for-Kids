@@ -38,7 +38,7 @@ JAVASCRIPT
 ## Credits:
 - Alaa Gamal
 - Omar Hussien
-- Yassmin Hamdy : @yassmin95
+- Yassmin Hamdy : @github/yassmin95
 - Youssef Abdelnasser
 
 ## License
